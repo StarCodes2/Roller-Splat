@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager singleton;
 
     private GroundPiece[] allGroundPieces;
+    public GameObject titleScreen;
+
+    public bool isCompleted;
 
     // Start is called before the first frame update
     void Start()
@@ -15,9 +18,22 @@ public class GameManager : MonoBehaviour
         SetupNewLevel();
     }
 
+    private void Update()
+    {
+        if (titleScreen.gameObject.activeSelf)
+        {
+            isCompleted = true;
+        }
+    }
+
     private void SetupNewLevel()
     {
         allGroundPieces = FindObjectsOfType<GroundPiece>();
+
+        if (SceneManager.GetActiveScene().buildIndex == 0 && isCompleted)
+        {
+
+        }
     }
 
     private void Awake()
@@ -66,11 +82,13 @@ public class GameManager : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().buildIndex == 5)
         {
+            isCompleted = true;
             SceneManager.LoadScene(0);
         }
         else
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            isCompleted = false;
         }
     }
 }

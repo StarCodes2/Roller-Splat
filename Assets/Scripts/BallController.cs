@@ -17,12 +17,14 @@ public class BallController : MonoBehaviour
     private Vector2 currentSwipe;
 
     private Color solveColor;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         solveColor = Random.ColorHSV(0.5f, 1);
         GetComponent<MeshRenderer>().material.color = solveColor;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void FixedUpdate()
@@ -57,7 +59,7 @@ public class BallController : MonoBehaviour
         if (isTraveling)
             return;
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && gameManager.isCompleted == false)
         {
             swipePosCurrentFrame = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 
@@ -90,7 +92,7 @@ public class BallController : MonoBehaviour
             swipePosLastFrame = swipePosCurrentFrame;
         }
 
-        if(Input.GetMouseButtonUp(0))
+        if(Input.GetMouseButtonUp(0) && gameManager.isCompleted == false)
         {
             swipePosLastFrame = Vector2.zero;
             currentSwipe = Vector2.zero;
