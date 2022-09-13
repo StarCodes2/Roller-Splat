@@ -29,11 +29,6 @@ public class GameManager : MonoBehaviour
     private void SetupNewLevel()
     {
         allGroundPieces = FindObjectsOfType<GroundPiece>();
-
-        if (SceneManager.GetActiveScene().buildIndex == 0 && isCompleted)
-        {
-
-        }
     }
 
     private void Awake()
@@ -83,7 +78,7 @@ public class GameManager : MonoBehaviour
         if(SceneManager.GetActiveScene().buildIndex == 5)
         {
             isCompleted = true;
-            SceneManager.LoadScene(0);
+            titleScreen.SetActive(true);
         }
         else
         {

@@ -4528,6 +4528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titleScreen: {fileID: 366634803}
+  buttonText: {fileID: 149815277}
 --- !u!1001 &2027847514
 PrefabInstance:
   m_ObjectHideFlags: 0
