@@ -7,6 +7,10 @@ public class BallController : MonoBehaviour
     public Rigidbody rb;
     public float speed = 15;
 
+    public ParticleSystem particle;
+    private AudioSource playerAudio;
+    public AudioClip hitSound;
+
     private bool isTraveling;
     private Vector3 travelDirection;
     private Vector3 nextCollisionPosition;
@@ -25,6 +29,7 @@ public class BallController : MonoBehaviour
         solveColor = Random.ColorHSV(0.5f, 1);
         GetComponent<MeshRenderer>().material.color = solveColor;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        playerAudio = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -110,6 +115,15 @@ public class BallController : MonoBehaviour
         }
 
         isTraveling = true;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.CompareTag("WallPiece") && !isTraveling)
+        {
+            particle.Play();
+            playerAudio.PlayOneShot(hitSound, 1.0f);
+        }
     }
 
     // Update is called once per frame
